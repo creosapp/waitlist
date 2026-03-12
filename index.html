@@ -369,6 +369,32 @@
     .pill-negotiating { background: rgba(124,156,245,0.12); color: #7c9cf5; }
     .db-deal-val { font-size: 13px; font-weight: 700; color: var(--text); }
 
+    /* Dashboard new elements */
+    .db-nav-item { display: flex; align-items: center; gap: 8px; }
+    .db-top-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0; }
+    .db-notif { position: relative; width: 28px; height: 28px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .db-notif-dot { position: absolute; top: 5px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--surface); }
+    .db-quick-actions { display: flex; gap: 5px; margin: 10px 0; }
+    .db-qa-item { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 5px; padding: 5px 9px; flex: 1; justify-content: center; white-space: nowrap; }
+    .db-qa-item.db-qa-accent { color: var(--accent); border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.05); }
+    .db-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .db-bottom-col { display: flex; flex-direction: column; }
+    .db-pipeline-status { display: flex; flex-direction: column; gap: 6px; }
+    .db-status-item { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.02); border: 1px solid var(--border2); border-radius: 6px; padding: 7px 10px; }
+    .db-status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .db-status-label { font-size: 10px; font-weight: 600; color: var(--text); width: 72px; flex-shrink: 0; }
+    .db-status-bar-wrap { flex: 1; height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
+    .db-status-bar { height: 100%; border-radius: 2px; }
+    .db-status-count { font-size: 9px; color: var(--muted); width: 14px; text-align: right; flex-shrink: 0; }
+    .db-status-val { font-size: 10px; font-weight: 700; color: var(--text); width: 40px; text-align: right; flex-shrink: 0; }
+    .db-kit-analytics { display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.02); border: 1px solid var(--border2); border-radius: 7px; padding: 10px 12px; flex: 1; }
+    .db-kit-mini-stats { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .db-kit-mini { display: flex; flex-direction: column; }
+    .db-kit-val { font-size: 16px; font-weight: 800; letter-spacing: -0.4px; }
+    .db-kit-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+    .db-kit-note { font-size: 9px; color: var(--green); margin-top: 2px; }
+    .db-kit-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+
     .db-fade {
       height: 130px; margin-top: -130px;
       background: linear-gradient(to bottom, transparent, var(--bg));
@@ -693,20 +719,61 @@
         <div class="db-sidebar">
           <div class="db-logo">creos<span>.</span></div>
           <div class="db-nav">
-            <div class="db-nav-item active">Dashboard</div>
-            <div class="db-nav-item">Contacts</div>
-            <div class="db-nav-item">Deals</div>
-            <div class="db-nav-item">Analytics</div>
-            <div class="db-nav-item">Media Kit</div>
+            <div class="db-nav-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              Dashboard
+            </div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              Contacts
+            </div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Deals
+            </div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Analytics
+            </div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              Media Kit
+            </div>
           </div>
           <div class="db-sidebar-foot">
-            <div class="db-avatar">C</div>
-            <div class="db-name">Chris Lawson</div>
+            <div class="db-avatar">J</div>
+            <div class="db-name">Jackson Berry</div>
           </div>
         </div>
         <div class="db-main">
-          <div class="db-greeting">Good morning, Chris.</div>
-          <div class="db-date">Thursday, 12 March 2026</div>
+          <div class="db-top-row">
+            <div>
+              <div class="db-greeting">Good morning, Jackson 👋</div>
+              <div class="db-date">Thursday, 12 March 2026</div>
+            </div>
+            <div class="db-notif">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <div class="db-notif-dot"></div>
+            </div>
+          </div>
+          <div class="db-quick-actions">
+            <div class="db-qa-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Update Stats
+            </div>
+            <div class="db-qa-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Update Rates
+            </div>
+            <div class="db-qa-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+              Edit Media Kit
+            </div>
+            <div class="db-qa-item db-qa-accent">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="11" height="11"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Share Kit
+            </div>
+          </div>
           <div class="db-stats">
             <div class="db-stat">
               <div class="db-stat-lbl">Revenue MTD</div>
@@ -716,39 +783,70 @@
             <div class="db-stat">
               <div class="db-stat-lbl">Active Deals</div>
               <div class="db-stat-val">7</div>
-              <div class="db-stat-note">↑ 2 new this week</div>
+              <div class="db-stat-note" style="color:var(--blue)">3 in negotiation</div>
             </div>
             <div class="db-stat green">
               <div class="db-stat-lbl">New Inquiry</div>
               <div class="db-stat-val" style="font-size:15px;margin-top:4px">Nike AU</div>
-              <div class="db-stat-note">● Just now via KitPage</div>
+              <div class="db-stat-note">● Just now</div>
             </div>
           </div>
-          <div class="db-sub-title">Deal Pipeline</div>
-          <div class="db-pipeline">
-            <div class="db-deal">
-              <div class="db-deal-info">
-                <div class="db-deal-brand">Gymshark</div>
-                <div class="db-deal-type">Reel + Story</div>
+          <div class="db-bottom-row">
+            <div class="db-bottom-col">
+              <div class="db-sub-title">Deal Pipeline</div>
+              <div class="db-pipeline-status">
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--accent)"></div>
+                  <div class="db-status-label">Inquiry</div>
+                  <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:28%;background:rgba(243,202,32,0.25)"></div></div>
+                  <div class="db-status-count">2</div>
+                  <div class="db-status-val">$5,000</div>
+                </div>
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--blue)"></div>
+                  <div class="db-status-label">Negotiating</div>
+                  <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:45%;background:rgba(124,156,245,0.25)"></div></div>
+                  <div class="db-status-count">3</div>
+                  <div class="db-status-val">$8,100</div>
+                </div>
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--green)"></div>
+                  <div class="db-status-label">Confirmed</div>
+                  <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:70%;background:rgba(76,175,125,0.25)"></div></div>
+                  <div class="db-status-count">2</div>
+                  <div class="db-status-val">$3,300</div>
+                </div>
               </div>
-              <div class="db-pill pill-confirmed">Confirmed</div>
-              <div class="db-deal-val">$2,400</div>
             </div>
-            <div class="db-deal">
-              <div class="db-deal-info">
-                <div class="db-deal-brand">Nike AU</div>
-                <div class="db-deal-type">Campaign Reel</div>
+            <div class="db-bottom-col">
+              <div class="db-sub-title">Media Kit Analytics</div>
+              <div class="db-kit-analytics">
+                <div class="db-kit-mini-stats">
+                  <div class="db-kit-mini">
+                    <div class="db-kit-val">1,240</div>
+                    <div class="db-kit-lbl">Views</div>
+                    <div class="db-kit-note">&#8593; 18%</div>
+                  </div>
+                  <div class="db-kit-divider"></div>
+                  <div class="db-kit-mini">
+                    <div class="db-kit-val">14</div>
+                    <div class="db-kit-lbl">Enquiries</div>
+                    <div class="db-kit-note">&#8593; 40%</div>
+                  </div>
+                  <div class="db-kit-divider"></div>
+                  <div class="db-kit-mini">
+                    <div class="db-kit-val">382</div>
+                    <div class="db-kit-lbl">Link Clicks</div>
+                    <div class="db-kit-note">&#8593; 12%</div>
+                  </div>
+                  <div class="db-kit-divider"></div>
+                  <div class="db-kit-mini">
+                    <div class="db-kit-val" style="font-size:11px;padding-top:2px">Instagram</div>
+                    <div class="db-kit-lbl">Top Referrer</div>
+                    <div class="db-kit-note">68% of views</div>
+                  </div>
+                </div>
               </div>
-              <div class="db-pill pill-pitched">Pitched</div>
-              <div class="db-deal-val">$3,200</div>
-            </div>
-            <div class="db-deal">
-              <div class="db-deal-info">
-                <div class="db-deal-brand">Lululemon</div>
-                <div class="db-deal-type">UGC Package</div>
-              </div>
-              <div class="db-pill pill-negotiating">Negotiating</div>
-              <div class="db-deal-val">$1,800</div>
             </div>
           </div>
         </div>
