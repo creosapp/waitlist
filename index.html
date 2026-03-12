@@ -633,6 +633,98 @@
       transform: translateY(0);
     }
 
+
+    /* ── MOBILE DASHBOARD ── */
+    .mobile-dashboard-wrap {
+      display: none;
+      padding: 0 24px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .mb-phone {
+      border-radius: 36px;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 32px 80px rgba(0,0,0,0.7);
+      background: var(--surface);
+      position: relative;
+    }
+    .mb-notch {
+      background: var(--bg2);
+      padding: 14px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .mb-notch-time { font-size: 11px; font-weight: 700; color: var(--text); }
+    .mb-notch-icons { display: flex; gap: 5px; align-items: center; }
+    .mb-notch-icons svg { width: 12px; height: 12px; stroke: var(--text); fill: none; stroke-width: 2; }
+    .mb-topbar {
+      background: var(--bg2);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .mb-logo { font-size: 14px; font-weight: 800; letter-spacing: -0.3px; }
+    .mb-logo span { color: var(--accent); }
+    .mb-notif-btn { position: relative; width: 30px; height: 30px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .mb-notif-btn svg { width: 13px; height: 13px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
+    .mb-notif-dot { position: absolute; top: 5px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--bg2); }
+    .mb-body { padding: 16px; }
+    .mb-greeting { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 1px; }
+    .mb-date { font-size: 10px; color: var(--muted); margin-bottom: 14px; }
+    .mb-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .mb-stat {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 12px 13px;
+    }
+    .mb-stat.accent { border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.04); }
+    .mb-stat.green { border-color: rgba(76,175,125,0.2); background: rgba(76,175,125,0.04); }
+    .mb-stat-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
+    .mb-stat-val { font-size: 19px; font-weight: 800; letter-spacing: -0.5px; }
+    .mb-stat-note { font-size: 9px; color: var(--green); margin-top: 3px; }
+    .mb-stat-note.yellow { color: var(--accent); }
+    .mb-section-title { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+    .mb-deals { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .mb-deal { display: flex; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; gap: 10px; }
+    .mb-deal-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mb-deal-info { flex: 1; }
+    .mb-deal-brand { font-size: 12px; font-weight: 600; }
+    .mb-deal-type { font-size: 10px; color: var(--muted); }
+    .mb-deal-val { font-size: 12px; font-weight: 700; }
+    .mb-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+    .mb-quick-btn { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; }
+    .mb-quick-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .mb-quick-btn.accent { color: var(--accent); border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.05); }
+    .mb-tabbar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 10px 8px 16px;
+      display: flex;
+      justify-content: space-around;
+    }
+    .mb-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .mb-tab svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
+    .mb-tab.active svg { stroke: var(--accent); }
+    .mb-tab-lbl { font-size: 9px; color: var(--muted); font-weight: 500; }
+    .mb-tab.active .mb-tab-lbl { color: var(--accent); font-weight: 700; }
+    .mb-fade {
+      height: 100px; margin-top: -100px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      position: relative; z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .db-chrome { display: none; }
+      .db-fade { display: none; }
+      .mobile-dashboard-wrap { display: block; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       #navbar { padding: 0 20px; }
@@ -671,7 +763,6 @@
     <a href="#" class="logo">creos<span>.</span></a>
     <div class="nav-right">
       <a href="#features" class="nav-link">Features</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
       <a href="#waitlist" class="nav-btn">Join Waitlist</a>
     </div>
   </nav>
@@ -855,6 +946,116 @@
     <div class="db-fade"></div>
   </div>
 
+  <!-- MOBILE DASHBOARD -->
+  <div class="mobile-dashboard-wrap reveal">
+    <div class="mb-phone">
+      <div class="mb-notch">
+        <div class="mb-notch-time">9:41</div>
+        <div class="mb-notch-icons">
+          <svg viewBox="0 0 24 24"><path d="M1.5 8.5s5-5 10.5-5 10.5 5 10.5 5"/><path d="M5 12s3.5-3.5 7-3.5 7 3.5 7 3.5"/><path d="M8.5 15.5s2-2 3.5-2 3.5 2 3.5 2"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="11" rx="2"/><path d="M22 11v3"/></svg>
+        </div>
+      </div>
+      <div class="mb-topbar">
+        <div class="mb-logo">creos<span>.</span></div>
+        <div class="mb-notif-btn">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <div class="mb-notif-dot"></div>
+        </div>
+      </div>
+      <div class="mb-body">
+        <div class="mb-greeting">Good morning, Chris 👋</div>
+        <div class="mb-date">Thursday, 12 March 2026</div>
+        <div class="mb-stats">
+          <div class="mb-stat green">
+            <div class="mb-stat-lbl">Revenue MTD</div>
+            <div class="mb-stat-val">$8,400</div>
+            <div class="mb-stat-note">↑ 24% this month</div>
+          </div>
+          <div class="mb-stat">
+            <div class="mb-stat-lbl">Active Deals</div>
+            <div class="mb-stat-val">7</div>
+            <div class="mb-stat-note" style="color:var(--blue)">3 negotiating</div>
+          </div>
+          <div class="mb-stat accent" style="grid-column: span 2;">
+            <div class="mb-stat-lbl">New Inquiry</div>
+            <div class="mb-stat-val" style="font-size:15px;padding-top:2px">Nike AU</div>
+            <div class="mb-stat-note yellow">● Just now via KitPage</div>
+          </div>
+        </div>
+        <div class="mb-section-title">Deal Pipeline</div>
+        <div class="mb-deals">
+          <div class="mb-deal">
+            <div class="mb-deal-dot" style="background:var(--green)"></div>
+            <div class="mb-deal-info">
+              <div class="mb-deal-brand">Gymshark</div>
+              <div class="mb-deal-type">Confirmed · Reel</div>
+            </div>
+            <div class="mb-deal-val">$2,400</div>
+          </div>
+          <div class="mb-deal">
+            <div class="mb-deal-dot" style="background:var(--blue)"></div>
+            <div class="mb-deal-info">
+              <div class="mb-deal-brand">Lululemon</div>
+              <div class="mb-deal-type">Negotiating · UGC</div>
+            </div>
+            <div class="mb-deal-val">$1,800</div>
+          </div>
+          <div class="mb-deal">
+            <div class="mb-deal-dot" style="background:var(--accent)"></div>
+            <div class="mb-deal-info">
+              <div class="mb-deal-brand">Nike AU</div>
+              <div class="mb-deal-type">Pitched · Campaign Reel</div>
+            </div>
+            <div class="mb-deal-val">$3,200</div>
+          </div>
+        </div>
+        <div class="mb-section-title">Quick Actions</div>
+        <div class="mb-quick">
+          <div class="mb-quick-btn">
+            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Update Stats
+          </div>
+          <div class="mb-quick-btn">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Update Rates
+          </div>
+          <div class="mb-quick-btn">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            Edit Media Kit
+          </div>
+          <div class="mb-quick-btn accent">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Share Kit
+          </div>
+        </div>
+      </div>
+      <div class="mb-tabbar">
+        <div class="mb-tab active">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          <div class="mb-tab-lbl">Dashboard</div>
+        </div>
+        <div class="mb-tab">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <div class="mb-tab-lbl">Deals</div>
+        </div>
+        <div class="mb-tab">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <div class="mb-tab-lbl">Contacts</div>
+        </div>
+        <div class="mb-tab">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <div class="mb-tab-lbl">Analytics</div>
+        </div>
+        <div class="mb-tab">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+          <div class="mb-tab-lbl">Media Kit</div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-fade"></div>
+  </div>
+
   <!-- FEATURES -->
   <section class="features reveal" id="features">
     <div class="features-header">
@@ -906,55 +1107,14 @@
 
       <div class="fc">
         <div class="fc-icon ic-o">
-          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="fc-name">Instant Notifications</div>
-        <div class="fc-desc">Push notification the moment a brand submits an inquiry. It lands directly in your pipeline.</div>
+        <div class="fc-name">AI Deal Insights</div>
+        <div class="fc-desc">Get AI-powered recommendations on deal pricing, negotiation timing, and conversion patterns to close more brand partnerships.</div>
       </div>
 
     </div>
   </section>
-
-  <!-- PRICING -->
-  <section class="pricing reveal" id="pricing">
-    <div class="pricing-header">
-      <span class="section-label">Pricing</span>
-      <h2 class="section-h2">Simple.<br />No surprises.</h2>
-      <p class="section-p">Early access pricing locked in permanently for waitlist members.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="pc">
-        <div class="pc-tier">Starter</div>
-        <div class="pc-price">$4<span class="pc-mo">/mo</span></div>
-        <p class="pc-desc">Everything you need to look professional and start landing brand deals from day one.</p>
-        <ul class="pc-list">
-          <li>KitPage at your own subdomain</li>
-          <li>5 active deals in pipeline</li>
-          <li>20 brand contacts</li>
-          <li>Collab inquiry form</li>
-          <li>Basic page analytics</li>
-          <li>PDF media kit export</li>
-        </ul>
-        <button class="pc-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
-      </div>
-      <div class="pc hot">
-        <div class="pc-tier">Pro — Most Popular</div>
-        <div class="pc-price">$19<span class="pc-mo">/mo</span></div>
-        <p class="pc-desc">The full creator OS. Unlimited everything, AI insights, and the complete revenue picture.</p>
-        <ul class="pc-list">
-          <li>Everything in Starter</li>
-          <li>Unlimited deals and contacts</li>
-          <li>Full revenue dashboard</li>
-          <li>Referral source tracking</li>
-          <li>Document hub</li>
-          <li>AI deal insights</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="pc-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Early Access</button>
-      </div>
-    </div>
-  </section>
-
 
   <!-- FINAL CTA -->
   <section class="final-cta reveal" id="waitlist">
