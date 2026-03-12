@@ -218,6 +218,7 @@
     .email-form button:hover { opacity: 0.85; }
 
     .form-note { font-size: 12px; color: var(--muted2); margin-bottom: 48px; }
+
     .success-msg {
       display: none;
       color: var(--green);
@@ -658,7 +659,7 @@
 
     <div class="email-form" id="hero-form-wrap">
       <input type="email" id="hero-email" placeholder="your@email.com" />
-      <button onclick="handleSubmit('hero-email','hero-success','hero-form-wrap')">Get Early Access</button>
+      <button onclick="submitToKit('hero-email','hero-success','hero-form-wrap',this)">Get Early Access</button>
     </div>
     <div class="success-msg" id="hero-success">✓ You're on the list. We'll be in touch.</div>
     <p class="form-note">No spam. Early access pricing locked in for waitlist members.</p>
@@ -834,7 +835,7 @@
           <li>Basic page analytics</li>
           <li>PDF media kit export</li>
         </ul>
-        <button class="pc-btn" onclick="document.getElementById('final-email').focus()">Join Waitlist</button>
+        <button class="pc-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Join Waitlist</button>
       </div>
       <div class="pc hot">
         <div class="pc-tier">Pro — Most Popular</div>
@@ -849,7 +850,7 @@
           <li>AI deal insights</li>
           <li>Priority support</li>
         </ul>
-        <button class="pc-btn" onclick="document.getElementById('final-email').focus()">Get Early Access</button>
+        <button class="pc-btn" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">Get Early Access</button>
       </div>
     </div>
   </section>
@@ -860,9 +861,9 @@
     <span class="section-label">Waitlist now open</span>
     <h2 class="final-h2">Stop running your<br />business from<br /><em>your DMs.</em></h2>
     <p class="final-p">Join the waitlist and lock in early access pricing before we launch.</p>
-    <div class="final-form" id="final-form-wrap">
+    <div class="email-form" id="final-form-wrap">
       <input type="email" id="final-email" placeholder="your@email.com" />
-      <button onclick="handleSubmit('final-email','final-success','final-form-wrap')">Join Waitlist</button>
+      <button onclick="submitToKit('final-email','final-success','final-form-wrap',this)">Join Waitlist</button>
     </div>
     <div class="success-msg" id="final-success">✓ You're on the list.</div>
   </section>
@@ -904,7 +905,7 @@
     reveals.forEach(r => revObs.observe(r));
 
     // Form submit
-    function handleSubmit(inputId, successId, formId) {
+    async function submitToKit(inputId, successId, formId, btn) {
       const input = document.getElementById(inputId);
       const success = document.getElementById(successId);
       const form = document.getElementById(formId);
@@ -913,7 +914,18 @@
         setTimeout(() => input.style.outline = '', 1600);
         return;
       }
-      console.log('Email:', input.value);
+      const originalText = btn.textContent;
+      btn.textContent = '...';
+      btn.disabled = true;
+      try {
+        const data = new FormData();
+        data.append('email_address', input.value);
+        await fetch('https://app.kit.com/forms/9196835/subscriptions', {
+          method: 'POST',
+          body: data,
+          mode: 'no-cors'
+        });
+      } catch(e) {}
       if (form) form.style.display = 'none';
       success.style.display = 'block';
     }
