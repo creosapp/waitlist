@@ -937,11 +937,14 @@
         });
         if (res.ok || res.status === 409) {
           // 409 = duplicate email, still show success
-          gtag('event', 'sign_up', {
-            method: 'waitlist',
-            event_category: 'engagement',
-            event_label: 'waitlist_form'
-          });
+          if (typeof gtag === 'function') {
+            gtag('event', 'sign_up', {
+              method: 'waitlist',
+              event_category: 'engagement',
+              event_label: 'waitlist_form',
+              debug_mode: true
+            });
+          }
           if (wrap) wrap.style.display = 'none';
           success.style.display = 'block';
         } else {
