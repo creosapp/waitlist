@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Creos — The Creator OS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a09'/><circle cx='16' cy='16' r='8' fill='%23f3ca20'/></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -402,6 +403,41 @@
     }
 
     /* ── FEATURES ── */
+    .integrations {
+      padding: 0 24px 100px;
+      max-width: 1040px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .integrations-label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--muted); margin-bottom: 32px;
+      display: block;
+    }
+    .integrations-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .integration-chip {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 12px 20px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .integration-chip:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .integration-chip svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .integration-chip img { width: 20px; height: 20px; flex-shrink: 0; filter: brightness(0) invert(1) opacity(0.8); }
+    .integration-chip-name { font-size: 13px; font-weight: 600; color: var(--text); }
+
     .features {
       padding: 100px 24px 120px;
       max-width: 1040px;
@@ -634,95 +670,117 @@
     }
 
 
+    /* ── DUAL DASHBOARD LAYOUT ── */
+    .dual-dashboard-wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .dual-dashboard-wrap .dashboard-wrap {
+      flex: 1;
+      padding: 0;
+      min-width: 0;
+    }
+    .dual-dashboard-wrap .mobile-dashboard-wrap {
+      display: block;
+      padding: 0;
+      width: 240px;
+      flex-shrink: 0;
+    }
+
     /* ── MOBILE DASHBOARD ── */
     .mobile-dashboard-wrap {
       display: none;
-      padding: 0 24px;
-      max-width: 380px;
+      max-width: 340px;
       margin: 0 auto;
+      padding: 0 20px;
     }
     .mb-phone {
-      border-radius: 36px;
-      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
       overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 32px 80px rgba(0,0,0,0.7);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03), 0 24px 60px rgba(0,0,0,0.6);
       background: var(--surface);
+      padding-bottom: 14px;
+    }
+    .mb-top-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .mb-notif-btn {
       position: relative;
+      width: 28px; height: 28px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    .mb-notch {
-      background: var(--bg2);
-      padding: 14px 20px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
+    .mb-notif-btn svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
+    .mb-notif-dot {
+      position: absolute; top: 5px; right: 5px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); border: 1.5px solid var(--surface);
     }
-    .mb-notch-time { font-size: 11px; font-weight: 700; color: var(--text); }
-    .mb-notch-icons { display: flex; gap: 5px; align-items: center; }
-    .mb-notch-icons svg { width: 12px; height: 12px; stroke: var(--text); fill: none; stroke-width: 2; }
-    .mb-topbar {
-      background: var(--bg2);
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
+    .mb-body { padding: 14px 14px 10px; }
+    .mb-greeting { font-size: 12px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 1px; }
+    .mb-date { font-size: 9px; color: var(--muted); margin-bottom: 10px; }
+    .mb-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px; }
+    .mb-quick-btn {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 9px; font-weight: 600; color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px; padding: 6px 8px;
     }
-    .mb-logo { font-size: 14px; font-weight: 800; letter-spacing: -0.3px; }
-    .mb-logo span { color: var(--accent); }
-    .mb-notif-btn { position: relative; width: 30px; height: 30px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .mb-notif-btn svg { width: 13px; height: 13px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
-    .mb-notif-dot { position: absolute; top: 5px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--bg2); }
-    .mb-body { padding: 16px; }
-    .mb-greeting { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 1px; }
-    .mb-date { font-size: 10px; color: var(--muted); margin-bottom: 14px; }
-    .mb-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+    .mb-quick-btn svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+    .mb-quick-btn.accent { color: var(--accent); border-color: rgba(243,202,32,0.25); background: rgba(243,202,32,0.05); }
+    .mb-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
     .mb-stat {
-      background: rgba(255,255,255,0.025);
+      background: rgba(255,255,255,0.02);
       border: 1px solid var(--border2);
-      border-radius: 10px;
-      padding: 12px 13px;
+      border-radius: 8px; padding: 8px 10px;
     }
-    .mb-stat.accent { border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.04); }
     .mb-stat.green { border-color: rgba(76,175,125,0.2); background: rgba(76,175,125,0.04); }
-    .mb-stat-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 5px; }
-    .mb-stat-val { font-size: 19px; font-weight: 800; letter-spacing: -0.5px; }
-    .mb-stat-note { font-size: 9px; color: var(--green); margin-top: 3px; }
+    .mb-stat.inquiry { grid-column: span 2; border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.04); }
+    .mb-stat-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; font-weight: 600; }
+    .mb-stat-val { font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
+    .mb-stat-note { font-size: 8px; margin-top: 2px; color: var(--green); }
+    .mb-stat-note.blue { color: #7c9cf5; }
     .mb-stat-note.yellow { color: var(--accent); }
-    .mb-section-title { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
-    .mb-deals { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
-    .mb-deal { display: flex; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; gap: 10px; }
-    .mb-deal-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .mb-deal-info { flex: 1; }
-    .mb-deal-brand { font-size: 12px; font-weight: 600; }
-    .mb-deal-type { font-size: 10px; color: var(--muted); }
-    .mb-deal-val { font-size: 12px; font-weight: 700; }
-    .mb-quick { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
-    .mb-quick-btn { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; }
-    .mb-quick-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 1.8; flex-shrink: 0; }
-    .mb-quick-btn.accent { color: var(--accent); border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.05); }
-    .mb-tabbar {
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      padding: 10px 8px 16px;
-      display: flex;
-      justify-content: space-around;
+    .mb-section-title { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .mb-pipeline { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+    .mb-pipe-row {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border2);
+      border-radius: 6px; padding: 6px 9px;
     }
-    .mb-tab { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-    .mb-tab svg { width: 18px; height: 18px; stroke: var(--muted); fill: none; stroke-width: 1.8; }
-    .mb-tab.active svg { stroke: var(--accent); }
-    .mb-tab-lbl { font-size: 9px; color: var(--muted); font-weight: 500; }
-    .mb-tab.active .mb-tab-lbl { color: var(--accent); font-weight: 700; }
-    .mb-fade {
-      height: 100px; margin-top: -100px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      position: relative; z-index: 2;
+    .mb-pipe-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .mb-pipe-label { font-size: 10px; font-weight: 600; flex: 1; }
+    .mb-pipe-bar-wrap { width: 44px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+    .mb-pipe-bar { height: 100%; border-radius: 2px; }
+    .mb-pipe-count { font-size: 9px; color: var(--muted); width: 10px; text-align: center; }
+    .mb-pipe-val { font-size: 10px; font-weight: 700; }
+    .mb-kit { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 4px; }
+    .mb-kit-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border2);
+      border-radius: 7px; padding: 7px 9px;
     }
-
-    @media (max-width: 768px) {
+    .mb-kit-val { font-size: 13px; font-weight: 800; letter-spacing: -0.3px; line-height: 1; margin-bottom: 2px; }
+    .mb-kit-val.sm { font-size: 10px; padding-top: 2px; }
+    .mb-kit-lbl { font-size: 8px; color: var(--muted); margin-bottom: 1px; }
+    .mb-kit-note { font-size: 8px; color: var(--green); }
+    .mb-kit-note.neutral { color: var(--muted); }
+    .mb-fade { display: none; }
+        @media (max-width: 768px) {
       .db-chrome { display: none; }
       .db-fade { display: none; }
-      .mobile-dashboard-wrap { display: block; }
+      .mobile-dashboard-wrap { display: block !important; }
     }
 
     /* ── RESPONSIVE ── */
@@ -949,68 +1007,21 @@
   <!-- MOBILE DASHBOARD -->
   <div class="mobile-dashboard-wrap reveal">
     <div class="mb-phone">
-      <div class="mb-notch">
-        <div class="mb-notch-time">9:41</div>
-        <div class="mb-notch-icons">
-          <svg viewBox="0 0 24 24"><path d="M1.5 8.5s5-5 10.5-5 10.5 5 10.5 5"/><path d="M5 12s3.5-3.5 7-3.5 7 3.5 7 3.5"/><path d="M8.5 15.5s2-2 3.5-2 3.5 2 3.5 2"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
-          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="11" rx="2"/><path d="M22 11v3"/></svg>
-        </div>
-      </div>
-      <div class="mb-topbar">
-        <div class="mb-logo">creos<span>.</span></div>
-        <div class="mb-notif-btn">
-          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-          <div class="mb-notif-dot"></div>
-        </div>
-      </div>
       <div class="mb-body">
-        <div class="mb-greeting">Good morning, Chris 👋</div>
-        <div class="mb-date">Thursday, 12 March 2026</div>
-        <div class="mb-stats">
-          <div class="mb-stat green">
-            <div class="mb-stat-lbl">Revenue MTD</div>
-            <div class="mb-stat-val">$8,400</div>
-            <div class="mb-stat-note">↑ 24% this month</div>
+
+        <!-- Greeting -->
+        <div class="mb-top-row">
+          <div>
+            <div class="mb-greeting">Good morning, Chris 👋</div>
+            <div class="mb-date">Thursday, 12 March 2026</div>
           </div>
-          <div class="mb-stat">
-            <div class="mb-stat-lbl">Active Deals</div>
-            <div class="mb-stat-val">7</div>
-            <div class="mb-stat-note" style="color:var(--blue)">3 negotiating</div>
-          </div>
-          <div class="mb-stat accent" style="grid-column: span 2;">
-            <div class="mb-stat-lbl">New Inquiry</div>
-            <div class="mb-stat-val" style="font-size:15px;padding-top:2px">Nike AU</div>
-            <div class="mb-stat-note yellow">● Just now via KitPage</div>
+          <div class="mb-notif-btn">
+            <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <div class="mb-notif-dot"></div>
           </div>
         </div>
-        <div class="mb-section-title">Deal Pipeline</div>
-        <div class="mb-deals">
-          <div class="mb-deal">
-            <div class="mb-deal-dot" style="background:var(--green)"></div>
-            <div class="mb-deal-info">
-              <div class="mb-deal-brand">Gymshark</div>
-              <div class="mb-deal-type">Confirmed · Reel</div>
-            </div>
-            <div class="mb-deal-val">$2,400</div>
-          </div>
-          <div class="mb-deal">
-            <div class="mb-deal-dot" style="background:var(--blue)"></div>
-            <div class="mb-deal-info">
-              <div class="mb-deal-brand">Lululemon</div>
-              <div class="mb-deal-type">Negotiating · UGC</div>
-            </div>
-            <div class="mb-deal-val">$1,800</div>
-          </div>
-          <div class="mb-deal">
-            <div class="mb-deal-dot" style="background:var(--accent)"></div>
-            <div class="mb-deal-info">
-              <div class="mb-deal-brand">Nike AU</div>
-              <div class="mb-deal-type">Pitched · Campaign Reel</div>
-            </div>
-            <div class="mb-deal-val">$3,200</div>
-          </div>
-        </div>
-        <div class="mb-section-title">Quick Actions</div>
+
+        <!-- Quick Actions -->
         <div class="mb-quick">
           <div class="mb-quick-btn">
             <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
@@ -1029,28 +1040,77 @@
             Share Kit
           </div>
         </div>
-      </div>
-      <div class="mb-tabbar">
-        <div class="mb-tab active">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          <div class="mb-tab-lbl">Dashboard</div>
+
+        <!-- Stats -->
+        <div class="mb-stats">
+          <div class="mb-stat green">
+            <div class="mb-stat-lbl">Revenue MTD</div>
+            <div class="mb-stat-val">$8,400</div>
+            <div class="mb-stat-note">↑ 24% vs last month</div>
+          </div>
+          <div class="mb-stat">
+            <div class="mb-stat-lbl">Active Deals</div>
+            <div class="mb-stat-val">7</div>
+            <div class="mb-stat-note blue">3 in negotiation</div>
+          </div>
+          <div class="mb-stat inquiry">
+            <div class="mb-stat-lbl">New Inquiry</div>
+            <div class="mb-stat-val" style="font-size:14px;padding-top:1px">Nike AU</div>
+            <div class="mb-stat-note yellow">● Just now</div>
+          </div>
         </div>
-        <div class="mb-tab">
-          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          <div class="mb-tab-lbl">Deals</div>
+
+        <!-- Deal Pipeline -->
+        <div class="mb-section-title">Deal Pipeline</div>
+        <div class="mb-pipeline">
+          <div class="mb-pipe-row">
+            <div class="mb-pipe-dot" style="background:var(--accent)"></div>
+            <div class="mb-pipe-label">Inquiry</div>
+            <div class="mb-pipe-bar-wrap"><div class="mb-pipe-bar" style="width:28%;background:rgba(243,202,32,0.35)"></div></div>
+            <div class="mb-pipe-count">2</div>
+            <div class="mb-pipe-val">$5,000</div>
+          </div>
+          <div class="mb-pipe-row">
+            <div class="mb-pipe-dot" style="background:#7c9cf5"></div>
+            <div class="mb-pipe-label">Negotiating</div>
+            <div class="mb-pipe-bar-wrap"><div class="mb-pipe-bar" style="width:45%;background:rgba(124,156,245,0.35)"></div></div>
+            <div class="mb-pipe-count">3</div>
+            <div class="mb-pipe-val">$8,100</div>
+          </div>
+          <div class="mb-pipe-row">
+            <div class="mb-pipe-dot" style="background:var(--green)"></div>
+            <div class="mb-pipe-label">Confirmed</div>
+            <div class="mb-pipe-bar-wrap"><div class="mb-pipe-bar" style="width:70%;background:rgba(76,175,125,0.35)"></div></div>
+            <div class="mb-pipe-count">2</div>
+            <div class="mb-pipe-val">$3,300</div>
+          </div>
         </div>
-        <div class="mb-tab">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-          <div class="mb-tab-lbl">Contacts</div>
+
+        <!-- Media Kit Analytics -->
+        <div class="mb-section-title">Media Kit Analytics</div>
+        <div class="mb-kit">
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">1,240</div>
+            <div class="mb-kit-lbl">Views</div>
+            <div class="mb-kit-note">↑ 18%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">14</div>
+            <div class="mb-kit-lbl">Enquiries</div>
+            <div class="mb-kit-note">↑ 40%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">382</div>
+            <div class="mb-kit-lbl">Link Clicks</div>
+            <div class="mb-kit-note">↑ 12%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val sm">Instagram</div>
+            <div class="mb-kit-lbl">Top Referrer</div>
+            <div class="mb-kit-note neutral">68% of views</div>
+          </div>
         </div>
-        <div class="mb-tab">
-          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <div class="mb-tab-lbl">Analytics</div>
-        </div>
-        <div class="mb-tab">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-          <div class="mb-tab-lbl">Media Kit</div>
-        </div>
+
       </div>
     </div>
     <div class="mb-fade"></div>
@@ -1109,8 +1169,40 @@
         <div class="fc-icon ic-o">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="fc-name">AI Deal Insights</div>
-        <div class="fc-desc">Get AI-powered recommendations on deal pricing, negotiation timing, and conversion patterns to close more brand partnerships.</div>
+        <div class="fc-name">Personalised Insights</div>
+        <div class="fc-desc">Know what to charge, when to follow up, and why your Media Kit Page isn't converting — all powered by your data.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="integrations reveal">
+    <span class="integrations-label">Works with the tools you already use</span>
+    <div class="integrations-logos">
+
+      <!-- Gmail -->
+      <div class="integration-chip">
+        <img src="https://cdn.simpleicons.org/gmail" alt="Gmail" width="20" height="20" />
+        <span class="integration-chip-name">Gmail</span>
+      </div>
+
+      <!-- Google Drive -->
+      <div class="integration-chip">
+        <img src="https://cdn.simpleicons.org/googledrive" alt="Google Drive" width="20" height="20" />
+        <span class="integration-chip-name">Google Drive</span>
+      </div>
+
+      <!-- Dropbox -->
+      <div class="integration-chip">
+        <img src="https://cdn.simpleicons.org/dropbox" alt="Dropbox" width="20" height="20" />
+        <span class="integration-chip-name">Dropbox</span>
+      </div>
+
+      <!-- Stripe -->
+      <div class="integration-chip">
+        <img src="https://cdn.simpleicons.org/stripe" alt="Stripe" width="20" height="20" />
+        <span class="integration-chip-name">Stripe</span>
       </div>
 
     </div>
