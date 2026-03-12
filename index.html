@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creos — The Creator OS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a09;
+      --bg2: #0f0f0e;
+      --surface: #141412;
+      --surface2: #1a1a18;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.04);
+      --text: #ede9e3;
+      --muted: #6b6860;
+      --muted2: #4a4845;
+      --accent: #f3ca20;
+      --accent-dim: rgba(243,202,32,0.08);
+      --green: #4caf7d;
+      --green-dim: rgba(76,175,125,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Ambient glow orbs — fixed behind everything */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(100px);
+      opacity: 0.6;
+    }
+    .orb-1 {
+      width: 900px; height: 700px;
+      top: -300px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(243,202,32,0.055) 0%, transparent 65%);
+    }
+    .orb-2 {
+      width: 600px; height: 600px;
+      top: 50vh; left: -200px;
+      background: radial-gradient(ellipse, rgba(76,175,125,0.04) 0%, transparent 70%);
+    }
+    .orb-3 {
+      width: 600px; height: 600px;
+      top: 70vh; right: -200px;
+      background: radial-gradient(ellipse, rgba(124,156,245,0.035) 0%, transparent 70%);
+    }
+
+    /* Everything above orbs */
+    #navbar, .hero-wrap, .dashboard-wrap,
+    .features, .pricing, .faq, .final-cta, footer {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── NAV ── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,9,0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-color: var(--border);
+    }
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-link {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-btn {
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      background: var(--accent);
+      color: #0a0a09;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-btn:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero-wrap {
+      padding: 180px 24px 80px;
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 32px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 16px;
+      border-radius: 100px;
+      backdrop-filter: blur(8px);
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(76,175,125,1), 0 0 20px rgba(76,175,125,0.4);
+      animation: breathe 2.4s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-h1 {
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto 44px;
+      font-weight: 400;
+    }
+
+    /* Email form */
+    .email-form {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      max-width: 420px;
+      margin: 0 auto 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 5px;
+      transition: border-color 0.2s;
+    }
+    .email-form:focus-within { border-color: rgba(243,202,32,0.3); }
+    .email-form input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+    }
+    .email-form input::placeholder { color: var(--muted2); }
+    .email-form button {
+      background: var(--accent);
+      color: #0a0a09;
+      border: none;
+      border-radius: 7px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+      flex-shrink: 0;
+    }
+    .email-form button:hover { opacity: 0.85; }
+
+    .form-note { font-size: 12px; color: var(--muted2); margin-bottom: 48px; }
+    .success-msg {
+      display: none;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    /* Social proof */
+    .social-proof {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatars { display: flex; }
+    .av {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+      color: #0a0a09;
+      margin-left: -8px;
+    }
+    .av:first-child { margin-left: 0; }
+    .av1{background:#f3ca20}.av2{background:#4caf7d}.av3{background:#7c9cf5}.av4{background:#e07c6a}.av5{background:#b07cd8}
+    .proof-text { font-size: 12px; color: var(--muted); }
+    .proof-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── DASHBOARD ── */
+    .dashboard-wrap {
+      padding: 0 40px 0;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .db-chrome {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 32px 80px rgba(0,0,0,0.6),
+        0 80px 160px rgba(0,0,0,0.4);
+    }
+    .db-bar {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 11px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .db-dots { position: absolute; left: 18px; display: flex; gap: 6px; }
+    .db-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .db-r{background:#ff5f57} .db-y{background:#febc2e} .db-g{background:#28c840}
+    .db-url {
+      font-size: 11px; color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      padding: 4px 20px;
+      pointer-events: none; user-select: none;
+    }
+    .db-inner {
+      display: grid;
+      grid-template-columns: 176px 1fr;
+      background: var(--surface);
+      min-height: 440px;
+    }
+    .db-sidebar {
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+    .db-logo { font-weight: 800; font-size: 15px; color: var(--text); padding: 0 8px; margin-bottom: 22px; letter-spacing: -0.3px; }
+    .db-logo span { color: var(--accent); }
+    .db-nav { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+    .db-nav-item {
+      font-size: 12px; color: var(--muted);
+      padding: 8px 10px; border-radius: 6px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .db-nav-item.active {
+      background: rgba(255,255,255,0.07);
+      color: var(--text); font-weight: 600;
+    }
+    .db-sidebar-foot {
+      margin-top: auto; padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .db-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #e07c6a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: #0a0a09; flex-shrink: 0;
+    }
+    .db-name { font-size: 12px; font-weight: 600; color: var(--text); }
+
+    .db-main { padding: 24px; overflow: hidden; }
+    .db-greeting { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.2px; }
+    .db-date { font-size: 11px; color: var(--muted); margin-bottom: 22px; }
+    .db-stats {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 10px; margin-bottom: 24px;
+    }
+    .db-stat {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border2);
+      border-radius: 8px; padding: 14px 16px;
+    }
+    .db-stat.green {
+      border-color: rgba(76,175,125,0.2);
+      background: rgba(76,175,125,0.04);
+    }
+    .db-stat-lbl {
+      font-size: 10px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px;
+    }
+    .db-stat-val { font-size: 21px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
+    .db-stat-note { font-size: 10px; margin-top: 4px; color: var(--green); }
+    .db-sub-title {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); margin-bottom: 10px;
+    }
+    .db-pipeline { display: flex; flex-direction: column; gap: 7px; }
+    .db-deal {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border2);
+      border-radius: 8px; padding: 10px 14px;
+      gap: 12px;
+    }
+    .db-deal-info { flex: 1; }
+    .db-deal-brand { font-size: 13px; font-weight: 600; color: var(--text); }
+    .db-deal-type { font-size: 11px; color: var(--muted); }
+    .db-pill {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.4px; padding: 3px 8px; border-radius: 4px;
+    }
+    .pill-confirmed { background: rgba(76,175,125,0.12); color: var(--green); }
+    .pill-pitched { background: rgba(243,202,32,0.1); color: var(--accent); }
+    .pill-negotiating { background: rgba(124,156,245,0.12); color: #7c9cf5; }
+    .db-deal-val { font-size: 13px; font-weight: 700; color: var(--text); }
+
+    .db-fade {
+      height: 130px; margin-top: -130px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      position: relative; z-index: 2;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 100px 24px 120px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 16px;
+      display: block;
+    }
+    .section-h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .section-p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 480px;
+    }
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .features-header .section-p {
+      margin: 0 auto;
+    }
+
+    /* Feature cards — strict 3x2 grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .fc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .fc:hover {
+      border-color: rgba(255,255,255,0.12);
+      background: var(--surface2);
+    }
+    .fc-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .fc-icon svg { width: 20px; height: 20px; stroke-width: 1.6; fill: none; }
+    .ic-y { background: rgba(243,202,32,0.08); box-shadow: 0 0 20px rgba(243,202,32,0.12); }
+    .ic-y svg { stroke: #f3ca20; filter: drop-shadow(0 0 4px rgba(243,202,32,0.5)); }
+    .ic-b { background: rgba(124,156,245,0.08); box-shadow: 0 0 20px rgba(124,156,245,0.12); }
+    .ic-b svg { stroke: #7c9cf5; filter: drop-shadow(0 0 4px rgba(124,156,245,0.5)); }
+    .ic-p { background: rgba(176,124,216,0.08); box-shadow: 0 0 20px rgba(176,124,216,0.12); }
+    .ic-p svg { stroke: #b07cd8; filter: drop-shadow(0 0 4px rgba(176,124,216,0.5)); }
+    .ic-g { background: rgba(76,175,125,0.08); box-shadow: 0 0 20px rgba(76,175,125,0.12); }
+    .ic-g svg { stroke: #4caf7d; filter: drop-shadow(0 0 4px rgba(76,175,125,0.5)); }
+    .ic-t { background: rgba(56,189,184,0.08); box-shadow: 0 0 20px rgba(56,189,184,0.12); }
+    .ic-t svg { stroke: #38bdb8; filter: drop-shadow(0 0 4px rgba(38,189,184,0.5)); }
+    .ic-o { background: rgba(224,124,106,0.08); box-shadow: 0 0 20px rgba(224,124,106,0.12); }
+    .ic-o svg { stroke: #e07c6a; filter: drop-shadow(0 0 4px rgba(224,124,106,0.5)); }
+    .fc-name {
+      font-size: 15px; font-weight: 700;
+      color: var(--text); margin-bottom: 8px; letter-spacing: -0.2px;
+    }
+    .fc-desc {
+      font-size: 13px; color: var(--muted); line-height: 1.7;
+    }
+
+    /* ── PRICING ── */
+    .pricing {
+      padding: 0 24px 120px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .pricing-header {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+    .pricing-header .section-p {
+      margin: 0 auto;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .pc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pc.hot {
+      border-color: rgba(243,202,32,0.25);
+      background: linear-gradient(160deg, rgba(243,202,32,0.04) 0%, var(--surface) 60%);
+    }
+    .pc-tier {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--muted); margin-bottom: 16px;
+    }
+    .pc.hot .pc-tier { color: var(--accent); }
+    .pc-price {
+      font-size: 52px; font-weight: 800;
+      letter-spacing: 3px; color: var(--text);
+      line-height: 1; margin-bottom: 16px;
+      display: flex; align-items: baseline; gap: 4px;
+    }
+    .pc-price sub {
+      font-size: 15px; font-weight: 400; color: var(--muted);
+      letter-spacing: 0; vertical-align: baseline;
+      position: static; line-height: 1;
+    }
+    .pc-mo {
+      font-size: 16px; font-weight: 400; color: var(--muted);
+      letter-spacing: 0; align-self: flex-end; padding-bottom: 6px;
+      margin-left: 4px;
+    }
+    .pc-desc {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.65; margin: 16px 0 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .pc-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 11px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .pc-list li {
+      font-size: 13px; color: var(--muted);
+      padding-left: 20px; position: relative;
+    }
+    .pc-list li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: var(--green); font-weight: 700;
+    }
+    .pc-btn {
+      width: 100%; padding: 13px;
+      border-radius: 8px; font-size: 13px; font-weight: 700;
+      font-family: inherit; cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent; color: var(--text);
+      transition: all 0.2s; letter-spacing: 0.1px;
+    }
+    .pc.hot .pc-btn {
+      background: var(--accent); color: #0a0a09;
+      border-color: transparent;
+    }
+    .pc-btn:hover { opacity: 0.82; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 80px 24px 120px;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .final-cta .section-label { margin-bottom: 20px; }
+    .final-h2 {
+      font-size: clamp(34px, 5.5vw, 62px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.0;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .final-h2 em { font-style: normal; color: var(--accent); }
+    .final-p { font-size: 15px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; }
+    .final-form {
+      display: flex;
+      align-items: center;
+      max-width: 420px;
+      margin: 0 auto 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 5px;
+      transition: border-color 0.2s;
+    }
+    .final-form:focus-within { border-color: rgba(243,202,32,0.3); }
+    .final-form input {
+      flex: 1; background: none; border: none; outline: none;
+      padding: 10px 14px; font-size: 14px; font-family: inherit; color: var(--text);
+    }
+    .final-form input::placeholder { color: var(--muted2); }
+    .final-form button {
+      background: var(--accent); color: #0a0a09;
+      border: none; border-radius: 7px;
+      padding: 10px 20px; font-size: 13px; font-weight: 700;
+      font-family: inherit; cursor: pointer; white-space: nowrap;
+      transition: opacity 0.2s; flex-shrink: 0;
+    }
+    .final-form button:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo { font-weight: 800; font-size: 15px; color: var(--text); letter-spacing: -0.3px; }
+    .footer-logo span { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--muted2); }
+
+    #features, #pricing, #waitlist {
+      scroll-margin-top: 80px;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      #navbar { padding: 0 20px; }
+      .nav-link { display: none; }
+      .hero-wrap { padding: 130px 20px 60px; }
+      .hero-h1 { letter-spacing: -2px; }
+      .dashboard-wrap { padding: 0 16px; }
+      .db-inner { grid-template-columns: 1fr; }
+      .db-sidebar { display: none; }
+      .features { padding: 70px 20px 80px; }
+      .features-header { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .fc-wide { grid-column: span 1; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient glow -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#" class="logo">creos<span>.</span></a>
+    <div class="nav-right">
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-wrap">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Join the waitlist &nbsp;→
+    </div>
+    <h1 class="hero-h1">The OS for your<br /><em>creator business.</em></h1>
+    <p class="hero-sub">A professional media kit page backed by a private workspace to manage deals, contacts, and revenue. Built for creators serious about brand partnerships.</p>
+
+    <div class="email-form" id="hero-form-wrap">
+      <input type="email" id="hero-email" placeholder="your@email.com" />
+      <button onclick="handleSubmit('hero-email','hero-success','hero-form-wrap')">Get Early Access</button>
+    </div>
+    <div class="success-msg" id="hero-success">✓ You're on the list. We'll be in touch.</div>
+    <p class="form-note">No spam. Early access pricing locked in for waitlist members.</p>
+
+    <div class="social-proof">
+      <div class="avatars">
+        <div class="av av1">C</div>
+        <div class="av av2">M</div>
+        <div class="av av3">S</div>
+        <div class="av av4">A</div>
+        <div class="av av5">R</div>
+      </div>
+      <p class="proof-text"><strong><span id="count">0</span> creators</strong> already on the waitlist</p>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard-wrap">
+    <div class="db-chrome">
+      <div class="db-bar">
+        <div class="db-dots">
+          <span class="db-r"></span>
+          <span class="db-y"></span>
+          <span class="db-g"></span>
+        </div>
+        <div class="db-url">dashboard.creosapp.com</div>
+      </div>
+      <div class="db-inner">
+        <div class="db-sidebar">
+          <div class="db-logo">creos<span>.</span></div>
+          <div class="db-nav">
+            <div class="db-nav-item active">Dashboard</div>
+            <div class="db-nav-item">Contacts</div>
+            <div class="db-nav-item">Deals</div>
+            <div class="db-nav-item">Analytics</div>
+            <div class="db-nav-item">Media Kit</div>
+          </div>
+          <div class="db-sidebar-foot">
+            <div class="db-avatar">C</div>
+            <div class="db-name">Chris Lawson</div>
+          </div>
+        </div>
+        <div class="db-main">
+          <div class="db-greeting">Good morning, Chris.</div>
+          <div class="db-date">Thursday, 12 March 2026</div>
+          <div class="db-stats">
+            <div class="db-stat">
+              <div class="db-stat-lbl">Revenue MTD</div>
+              <div class="db-stat-val">$8,400</div>
+              <div class="db-stat-note">↑ 24% vs last month</div>
+            </div>
+            <div class="db-stat">
+              <div class="db-stat-lbl">Active Deals</div>
+              <div class="db-stat-val">7</div>
+              <div class="db-stat-note">↑ 2 new this week</div>
+            </div>
+            <div class="db-stat green">
+              <div class="db-stat-lbl">New Inquiry</div>
+              <div class="db-stat-val" style="font-size:15px;margin-top:4px">Nike AU</div>
+              <div class="db-stat-note">● Just now via KitPage</div>
+            </div>
+          </div>
+          <div class="db-sub-title">Deal Pipeline</div>
+          <div class="db-pipeline">
+            <div class="db-deal">
+              <div class="db-deal-info">
+                <div class="db-deal-brand">Gymshark</div>
+                <div class="db-deal-type">Reel + Story</div>
+              </div>
+              <div class="db-pill pill-confirmed">Confirmed</div>
+              <div class="db-deal-val">$2,400</div>
+            </div>
+            <div class="db-deal">
+              <div class="db-deal-info">
+                <div class="db-deal-brand">Nike AU</div>
+                <div class="db-deal-type">Campaign Reel</div>
+              </div>
+              <div class="db-pill pill-pitched">Pitched</div>
+              <div class="db-deal-val">$3,200</div>
+            </div>
+            <div class="db-deal">
+              <div class="db-deal-info">
+                <div class="db-deal-brand">Lululemon</div>
+                <div class="db-deal-type">UGC Package</div>
+              </div>
+              <div class="db-pill pill-negotiating">Negotiating</div>
+              <div class="db-deal-val">$1,800</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="db-fade"></div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features reveal" id="features">
+    <div class="features-header">
+      <span class="section-label">What's inside</span>
+      <h2 class="section-h2">Every tool your<br />creator business needs.</h2>
+      <p class="section-p">One workspace. No more scattered Google Docs, Canva PDFs, and lost DMs from brands you can't find six weeks later.</p>
+    </div>
+    <div class="features-grid">
+
+      <div class="fc">
+        <div class="fc-icon ic-y">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="fc-name">Media Kit Page</div>
+        <div class="fc-desc">A live, beautifully designed page at username.creosapp.com. Share one link and brands have everything they need to say yes.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-icon ic-b">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+        </div>
+        <div class="fc-name">Deal Pipeline</div>
+        <div class="fc-desc">Track every brand deal from pitched to paid. Stages, notes, deliverables, and deadlines in one place.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-icon ic-p">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="fc-name">Brand CRM</div>
+        <div class="fc-desc">Your full contact book for managers, PR reps, and agencies — linked to every deal so nothing gets lost.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-icon ic-g">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="fc-name">Revenue Dashboard</div>
+        <div class="fc-desc">Earned, outstanding, and incoming — all in one place. Monthly totals, YTD, and pipeline projections.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-icon ic-t">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="fc-name">Analytics</div>
+        <div class="fc-desc">Know who's viewing your page, where they came from, and whether they converted to an inquiry.</div>
+      </div>
+
+      <div class="fc">
+        <div class="fc-icon ic-o">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="fc-name">Instant Notifications</div>
+        <div class="fc-desc">Push notification the moment a brand submits an inquiry. It lands directly in your pipeline.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing reveal" id="pricing">
+    <div class="pricing-header">
+      <span class="section-label">Pricing</span>
+      <h2 class="section-h2">Simple.<br />No surprises.</h2>
+      <p class="section-p">Early access pricing locked in permanently for waitlist members.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pc">
+        <div class="pc-tier">Starter</div>
+        <div class="pc-price">$4<span class="pc-mo">/mo</span></div>
+        <p class="pc-desc">Everything you need to look professional and start landing brand deals from day one.</p>
+        <ul class="pc-list">
+          <li>KitPage at your own subdomain</li>
+          <li>5 active deals in pipeline</li>
+          <li>20 brand contacts</li>
+          <li>Collab inquiry form</li>
+          <li>Basic page analytics</li>
+          <li>PDF media kit export</li>
+        </ul>
+        <button class="pc-btn" onclick="document.getElementById('final-email').focus()">Join Waitlist</button>
+      </div>
+      <div class="pc hot">
+        <div class="pc-tier">Pro — Most Popular</div>
+        <div class="pc-price">$19<span class="pc-mo">/mo</span></div>
+        <p class="pc-desc">The full creator OS. Unlimited everything, AI insights, and the complete revenue picture.</p>
+        <ul class="pc-list">
+          <li>Everything in Starter</li>
+          <li>Unlimited deals and contacts</li>
+          <li>Full revenue dashboard</li>
+          <li>Referral source tracking</li>
+          <li>Document hub</li>
+          <li>AI deal insights</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="pc-btn" onclick="document.getElementById('final-email').focus()">Get Early Access</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FINAL CTA -->
+  <section class="final-cta reveal" id="waitlist">
+    <span class="section-label">Waitlist now open</span>
+    <h2 class="final-h2">Stop running your<br />business from<br /><em>your DMs.</em></h2>
+    <p class="final-p">Join the waitlist and lock in early access pricing before we launch.</p>
+    <div class="final-form" id="final-form-wrap">
+      <input type="email" id="final-email" placeholder="your@email.com" />
+      <button onclick="handleSubmit('final-email','final-success','final-form-wrap')">Join Waitlist</button>
+    </div>
+    <div class="success-msg" id="final-success">✓ You're on the list.</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">creos<span>.</span></div>
+    <div class="footer-copy">© 2026 Creos. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Waitlist counter
+    const countEl = document.getElementById('count');
+    const countObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        let n = 0, target = 247;
+        const step = Math.ceil(target / 55);
+        const t = setInterval(() => {
+          n = Math.min(n + step, target);
+          countEl.textContent = n;
+          if (n >= target) clearInterval(t);
+        }, 18);
+        countObs.disconnect();
+      }
+    });
+    countObs.observe(countEl);
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    reveals.forEach(r => revObs.observe(r));
+
+    // Form submit
+    function handleSubmit(inputId, successId, formId) {
+      const input = document.getElementById(inputId);
+      const success = document.getElementById(successId);
+      const form = document.getElementById(formId);
+      if (!input.value || !input.value.includes('@')) {
+        input.style.outline = '1px solid rgba(224,124,106,0.6)';
+        setTimeout(() => input.style.outline = '', 1600);
+        return;
+      }
+      console.log('Email:', input.value);
+      if (form) form.style.display = 'none';
+      success.style.display = 'block';
+    }
+
+  </script>
+</body>
+</html>
