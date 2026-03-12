@@ -905,29 +905,42 @@
     reveals.forEach(r => revObs.observe(r));
 
     // Form submit
-    async function submitToKit(inputId, successId, formId, btn) {
+    function submitToKit(inputId, successId, formId, btn) {
       const input = document.getElementById(inputId);
       const success = document.getElementById(successId);
-      const form = document.getElementById(formId);
+      const wrap = document.getElementById(formId);
       if (!input.value || !input.value.includes('@')) {
         input.style.outline = '1px solid rgba(224,124,106,0.6)';
         setTimeout(() => input.style.outline = '', 1600);
         return;
       }
-      const originalText = btn.textContent;
       btn.textContent = '...';
       btn.disabled = true;
-      try {
-        const data = new FormData();
-        data.append('email_address', input.value);
-        await fetch('https://app.kit.com/forms/9196835/subscriptions', {
-          method: 'POST',
-          body: data,
-          mode: 'no-cors'
-        });
-      } catch(e) {}
-      if (form) form.style.display = 'none';
-      success.style.display = 'block';
+
+      const iframe = document.createElement('iframe');
+      iframe.name = 'kit-frame-' + inputId;
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://app.kit.com/forms/9196835/subscriptions';
+      form.target = iframe.name;
+
+      const emailField = document.createElement('input');
+      emailField.type = 'hidden';
+      emailField.name = 'email_address';
+      emailField.value = input.value;
+      form.appendChild(emailField);
+      document.body.appendChild(form);
+
+      iframe.onload = function() {
+        if (wrap) wrap.style.display = 'none';
+        success.style.display = 'block';
+        setTimeout(() => { form.remove(); iframe.remove(); }, 1000);
+      };
+
+      form.submit();
     }
 
   </script>
