@@ -33,6 +33,8 @@
       --accent-dim: rgba(243,202,32,0.08);
       --green: #4caf7d;
       --green-dim: rgba(76,175,125,0.08);
+      --blue: #7c9cf5;
+      --red:  #e06c6c;
     }
 
     html { scroll-behavior: smooth; }
@@ -339,8 +341,8 @@
     .db-greeting { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.2px; }
     .db-date { font-size: 11px; color: var(--muted); margin-bottom: 22px; }
     .db-stats {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 10px; margin-bottom: 24px;
+      display: grid; grid-template-columns: repeat(2,1fr);
+      gap: 10px; margin-bottom: 16px;
     }
     .db-stat {
       background: rgba(255,255,255,0.025);
@@ -803,6 +805,8 @@
       .dashboard-wrap { padding: 0 16px; }
       .db-inner { grid-template-columns: 1fr; }
       .db-sidebar { display: none; }
+      .problem-grid-icons { grid-template-columns: repeat(2, 1fr); }
+      .problem-section { padding: 60px 20px; }
       .features { padding: 70px 20px 80px; }
       .features-header { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
@@ -810,6 +814,40 @@
       .pricing-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
     }
+
+    /* ── PROBLEM SECTION ── */
+
+    .problem-section {
+      padding: 80px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .problem-grid-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .pi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .pi-card:hover { border-color: rgba(255,255,255,0.12); }
+    .pi-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .pi-icon svg { fill: none; stroke-width: 1.8; }
+    .pi-icon-red  { background: rgba(224,108,108,0.1); }
+    .pi-icon-red svg  { stroke: var(--red); }
+    .pi-title { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .pi-desc  { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPCE036FQE"></script>
@@ -934,24 +972,88 @@
               Share Kit
             </div>
           </div>
+          <!-- Row 1: Analytics · Revenue -->
           <div class="db-stats">
             <div class="db-stat">
-              <div class="db-stat-lbl">Revenue MTD</div>
-              <div class="db-stat-val">$8,400</div>
-              <div class="db-stat-note">↑ 24% vs last month</div>
+              <div class="db-stat-lbl">Analytics</div>
+              <div class="db-kit-mini-stats" style="margin-top:8px;">
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">1,240</div>
+                  <div class="db-kit-lbl">Views</div>
+                  <div class="db-kit-note">&#8593; 18%</div>
+                </div>
+                <div class="db-kit-divider"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">14</div>
+                  <div class="db-kit-lbl">Enquiries</div>
+                  <div class="db-kit-note">&#8593; 40%</div>
+                </div>
+                <div class="db-kit-divider"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">382</div>
+                  <div class="db-kit-lbl">Link Clicks</div>
+                  <div class="db-kit-note">&#8593; 12%</div>
+                </div>
+                <div class="db-kit-divider"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val" style="font-size:11px;padding-top:2px">Instagram</div>
+                  <div class="db-kit-lbl">Top Referrer</div>
+                  <div class="db-kit-note">68% of views</div>
+                </div>
+              </div>
             </div>
             <div class="db-stat">
-              <div class="db-stat-lbl">Active Deals</div>
-              <div class="db-stat-val">7</div>
-              <div class="db-stat-note" style="color:var(--blue)">3 in negotiation</div>
-            </div>
-            <div class="db-stat green">
-              <div class="db-stat-lbl">New Inquiry</div>
-              <div class="db-stat-val" style="font-size:15px;margin-top:4px">Nike AU</div>
-              <div class="db-stat-note">● Just now</div>
+              <div class="db-stat-lbl">Revenue</div>
+              <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;">
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--green)"></div>
+                  <div class="db-status-label">MTD</div>
+                  <div style="flex:1"></div>
+                  <div class="db-status-val" style="color:var(--green);width:auto;font-size:12px;">$8,400</div>
+                  <div class="db-kit-note" style="margin-left:5px;font-size:9px;">↑ 24%</div>
+                </div>
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--muted2)"></div>
+                  <div class="db-status-label">Outstanding</div>
+                  <div style="flex:1"></div>
+                  <div class="db-status-val" style="width:auto;font-size:12px;">$3,200</div>
+                </div>
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--accent)"></div>
+                  <div class="db-status-label">Pipeline</div>
+                  <div style="flex:1"></div>
+                  <div class="db-status-val" style="color:var(--accent);width:auto;font-size:12px;">$16,400</div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Row 2: Active Deals · Deal Pipeline -->
           <div class="db-bottom-row">
+            <div class="db-bottom-col">
+              <div class="db-sub-title">Active Deals</div>
+              <div style="display:flex;align-items:baseline;gap:6px;margin-top:4px;margin-bottom:8px;">
+                <div style="font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text);line-height:1;">7</div>
+                <div style="font-size:10px;color:var(--blue);">3 in negotiation</div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
+                <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                  <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Inquiry</div>
+                  <div style="font-size:14px;font-weight:800;color:var(--accent);">2</div>
+                  <div style="font-size:9px;color:var(--muted2);">$5,000</div>
+                </div>
+                <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                  <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Negotiating</div>
+                  <div style="font-size:14px;font-weight:800;color:var(--blue);">3</div>
+                  <div style="font-size:9px;color:var(--muted2);">$8,100</div>
+                </div>
+                <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
+                  <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Confirmed</div>
+                  <div style="font-size:14px;font-weight:800;color:var(--green);">2</div>
+                  <div style="font-size:9px;color:var(--muted2);">$3,300</div>
+                </div>
+              </div>
+            </div>
             <div class="db-bottom-col">
               <div class="db-sub-title">Deal Pipeline</div>
               <div class="db-pipeline-status">
@@ -975,36 +1077,6 @@
                   <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:70%;background:rgba(76,175,125,0.25)"></div></div>
                   <div class="db-status-count">2</div>
                   <div class="db-status-val">$3,300</div>
-                </div>
-              </div>
-            </div>
-            <div class="db-bottom-col">
-              <div class="db-sub-title">Media Kit Analytics</div>
-              <div class="db-kit-analytics">
-                <div class="db-kit-mini-stats">
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">1,240</div>
-                    <div class="db-kit-lbl">Views</div>
-                    <div class="db-kit-note">&#8593; 18%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">14</div>
-                    <div class="db-kit-lbl">Enquiries</div>
-                    <div class="db-kit-note">&#8593; 40%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">382</div>
-                    <div class="db-kit-lbl">Link Clicks</div>
-                    <div class="db-kit-note">&#8593; 12%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val" style="font-size:11px;padding-top:2px">Instagram</div>
-                    <div class="db-kit-lbl">Top Referrer</div>
-                    <div class="db-kit-note">68% of views</div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1049,6 +1121,31 @@
           <div class="mb-quick-btn accent">
             <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Share Kit
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="mb-section-title">Analytics</div>
+        <div class="mb-kit">
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">1,240</div>
+            <div class="mb-kit-lbl">Views</div>
+            <div class="mb-kit-note">↑ 18%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">14</div>
+            <div class="mb-kit-lbl">Enquiries</div>
+            <div class="mb-kit-note">↑ 40%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val">382</div>
+            <div class="mb-kit-lbl">Link Clicks</div>
+            <div class="mb-kit-note">↑ 12%</div>
+          </div>
+          <div class="mb-kit-card">
+            <div class="mb-kit-val sm">Instagram</div>
+            <div class="mb-kit-lbl">Top Referrer</div>
+            <div class="mb-kit-note neutral">68% of views</div>
           </div>
         </div>
 
@@ -1097,35 +1194,62 @@
           </div>
         </div>
 
-        <!-- Media Kit Analytics -->
-        <div class="mb-section-title">Media Kit Analytics</div>
-        <div class="mb-kit">
-          <div class="mb-kit-card">
-            <div class="mb-kit-val">1,240</div>
-            <div class="mb-kit-lbl">Views</div>
-            <div class="mb-kit-note">↑ 18%</div>
-          </div>
-          <div class="mb-kit-card">
-            <div class="mb-kit-val">14</div>
-            <div class="mb-kit-lbl">Enquiries</div>
-            <div class="mb-kit-note">↑ 40%</div>
-          </div>
-          <div class="mb-kit-card">
-            <div class="mb-kit-val">382</div>
-            <div class="mb-kit-lbl">Link Clicks</div>
-            <div class="mb-kit-note">↑ 12%</div>
-          </div>
-          <div class="mb-kit-card">
-            <div class="mb-kit-val sm">Instagram</div>
-            <div class="mb-kit-lbl">Top Referrer</div>
-            <div class="mb-kit-note neutral">68% of views</div>
-          </div>
-        </div>
-
       </div>
     </div>
     <div class="mb-fade"></div>
   </div>
+
+  <!-- PROBLEM -->
+  <section class="problem-section reveal">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="section-label">The problem</span>
+      <h2 class="section-h2" style="margin-top:12px;">Sound familiar?</h2>
+      <p class="section-p" style="margin:0 auto;text-align:center;">Most creative professionals are running real businesses on tools built for something else entirely.</p>
+    </div>
+    <div class="problem-grid-icons">
+
+      <div class="pi-card">
+        <div class="pi-icon pi-icon-red">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="pi-title">Sending PDFs as your media kit</div>
+          <div class="pi-desc">Outdated the moment you hit send. No analytics, no inquiry form, no easy updates.</div>
+        </div>
+      </div>
+
+      <div class="pi-card">
+        <div class="pi-icon pi-icon-red">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="pi-title">Managing work through DMs</div>
+          <div class="pi-desc">Enquiries buried in your inbox. No pipeline, no tracking, no follow-up system.</div>
+        </div>
+      </div>
+
+      <div class="pi-card">
+        <div class="pi-icon pi-icon-red">
+          <svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        </div>
+        <div>
+          <div class="pi-title">Revenue tracked in a spreadsheet</div>
+          <div class="pi-desc">No totals, no YTD. You couldn't tell someone what you earned last quarter.</div>
+        </div>
+      </div>
+
+      <div class="pi-card">
+        <div class="pi-icon pi-icon-red">
+          <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div>
+          <div class="pi-title">Deals dying from no follow-up</div>
+          <div class="pi-desc">Work stalls because life got busy. Money left on the table every single week.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- FEATURES -->
   <section class="features reveal" id="features">
