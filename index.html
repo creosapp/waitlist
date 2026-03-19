@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>creos. — Creator OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a09'/><circle cx='16' cy='16' r='8' fill='%23f3ca20'/></svg>">
   <meta property="og:title" content="Creos — The Creator OS" />
   <meta property="og:description" content="A professional media kit page backed by a private workspace to manage deals, contacts, and revenue. Built for creators serious about brand partnerships." />
@@ -173,7 +176,7 @@
     .eyebrow-dot {
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--green);
+      background: #48B17C;
       box-shadow: 0 0 10px rgba(76,175,125,1), 0 0 20px rgba(76,175,125,0.4);
       animation: breathe 2.4s ease-in-out infinite;
       flex-shrink: 0;
@@ -251,7 +254,7 @@
 
     .success-msg {
       display: none;
-      color: var(--green);
+      color: #48B17C;
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 14px;
@@ -285,6 +288,7 @@
       margin: 0 auto;
     }
     .db-chrome {
+      font-family: 'DM Sans', sans-serif;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid rgba(255,255,255,0.09);
@@ -294,8 +298,8 @@
         0 80px 160px rgba(0,0,0,0.4);
     }
     .db-bar {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--border);
+      background: #0A0A09;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
       padding: 11px 18px;
       display: flex;
       align-items: center;
@@ -316,12 +320,12 @@
     .db-inner {
       display: grid;
       grid-template-columns: 176px 1fr;
-      background: var(--surface);
+      background: #151413;
       min-height: 440px;
     }
     .db-sidebar {
-      background: var(--bg2);
-      border-right: 1px solid var(--border);
+      background: #0A0A09;
+      border-right: 1px solid rgba(255,255,255,0.07);
       padding: 20px 14px;
       display: flex;
       flex-direction: column;
@@ -336,7 +340,7 @@
     }
     .db-nav-item.active {
       background: rgba(255,255,255,0.07);
-      color: var(--text); font-weight: 600;
+      color: #EEEAE6; font-weight: 600;
     }
     .db-sidebar-foot {
       margin-top: auto; padding-top: 14px;
@@ -345,14 +349,14 @@
     }
     .db-avatar {
       width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #e07c6a);
+      background: linear-gradient(135deg, #F2C421, #e8a800);
       display: flex; align-items: center; justify-content: center;
       font-size: 10px; font-weight: 800; color: #0a0a09; flex-shrink: 0;
     }
     .db-name { font-size: 12px; font-weight: 600; color: var(--text); }
 
     .db-main { padding: 24px; overflow: hidden; }
-    .db-greeting { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.2px; }
+    .db-greeting { font-size: 14px; font-weight: 700; color: #EEEAE6; margin-bottom: 2px; letter-spacing: -0.02em; }
     .db-date { font-size: 11px; color: var(--muted); margin-bottom: 22px; }
     .db-stats {
       display: grid; grid-template-columns: repeat(2,1fr);
@@ -360,8 +364,8 @@
     }
     .db-stat {
       background: rgba(255,255,255,0.025);
-      border: 1px solid var(--border2);
-      border-radius: 8px; padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 10px; padding: 14px 16px;
     }
     .db-stat.green {
       border-color: rgba(76,175,125,0.2);
@@ -372,7 +376,7 @@
       text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px;
     }
     .db-stat-val { font-size: 21px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
-    .db-stat-note { font-size: 10px; margin-top: 4px; color: var(--green); }
+    .db-stat-note { font-size: 10px; margin-top: 4px; color: #48B17C; }
     .db-sub-title {
       font-size: 10px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 1px; color: var(--muted); margin-bottom: 10px;
@@ -392,14 +396,14 @@
       font-size: 10px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.4px; padding: 3px 8px; border-radius: 4px;
     }
-    .pill-confirmed { background: rgba(76,175,125,0.12); color: var(--green); }
+    .pill-confirmed { background: rgba(76,175,125,0.12); color: #48B17C; }
     .pill-pitched { background: rgba(243,202,32,0.1); color: var(--accent); }
     .pill-negotiating { background: rgba(124,156,245,0.12); color: #7c9cf5; }
     .db-deal-val { font-size: 13px; font-weight: 700; color: var(--text); }
 
     /* Dashboard new elements */
     .db-nav-item { display: flex; align-items: center; gap: 8px; }
-    .db-top-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0; }
+    .db-top-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
     .db-notif { position: relative; width: 28px; height: 28px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .db-notif-dot { position: absolute; top: 5px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--surface); }
     .db-quick-actions { display: flex; gap: 5px; margin: 10px 0; }
@@ -420,7 +424,7 @@
     .db-kit-mini { display: flex; flex-direction: column; }
     .db-kit-val { font-size: 16px; font-weight: 800; letter-spacing: -0.4px; }
     .db-kit-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
-    .db-kit-note { font-size: 9px; color: var(--green); margin-top: 2px; }
+    .db-kit-note { font-size: 9px; color: #48B17C; margin-top: 2px; }
     .db-kit-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
 
     .db-fade {
@@ -610,7 +614,7 @@
     }
     .pc-list li::before {
       content: '✓'; position: absolute; left: 0;
-      color: var(--green); font-weight: 700;
+      color: #48B17C; font-weight: 700;
     }
     .pc-btn {
       width: 100%; padding: 13px;
@@ -814,7 +818,7 @@
     .mb-stat.inquiry { grid-column: span 2; border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.04); }
     .mb-stat-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 3px; font-weight: 600; }
     .mb-stat-val { font-size: 16px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
-    .mb-stat-note { font-size: 8px; margin-top: 2px; color: var(--green); }
+    .mb-stat-note { font-size: 8px; margin-top: 2px; color: #48B17C; }
     .mb-stat-note.blue { color: #7c9cf5; }
     .mb-stat-note.yellow { color: var(--accent); }
     .mb-section-title { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
@@ -840,7 +844,7 @@
     .mb-kit-val { font-size: 13px; font-weight: 800; letter-spacing: -0.3px; line-height: 1; margin-bottom: 2px; }
     .mb-kit-val.sm { font-size: 10px; padding-top: 2px; }
     .mb-kit-lbl { font-size: 8px; color: var(--muted); margin-bottom: 1px; }
-    .mb-kit-note { font-size: 8px; color: var(--green); }
+    .mb-kit-note { font-size: 8px; color: #48B17C; }
     .mb-kit-note.neutral { color: var(--muted); }
     .mb-fade { display: none; }
         @media (max-width: 768px) {
@@ -877,7 +881,7 @@
     }
     .pi-icon svg { fill: none; stroke-width: 1.8; }
     .pi-icon-red  { background: rgba(224,108,108,0.1); }
-    .pi-icon-red svg  { stroke: var(--red); }
+    .pi-icon-red svg  { stroke: #DF6B6B; }
     .pi-title { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
     .pi-desc  { font-size: 12px; color: var(--muted); line-height: 1.6; }
 
@@ -1064,47 +1068,42 @@
           <div class="db-stats">
             <div class="db-stat">
               <div class="db-stat-lbl">Analytics</div>
-              <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;font-weight:600;margin-top:4px;margin-bottom:2px;">MTD</div>
-              <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
-                <!-- Row 1: Views · Enquiries · Link Clicks -->
-                <div class="db-kit-mini-stats">
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">1,240</div>
-                    <div class="db-kit-lbl">Views</div>
-                    <div class="db-kit-note">&#8593; 18%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">14</div>
-                    <div class="db-kit-lbl">Enquiries</div>
-                    <div class="db-kit-note">&#8593; 40%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">382</div>
-                    <div class="db-kit-lbl">Link Clicks</div>
-                    <div class="db-kit-note">&#8593; 12%</div>
-                  </div>
+              <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted2);margin-top:2px;margin-bottom:8px;">MTD</div>
+              <!-- Row 1: Views · Enquiries · Link Clicks -->
+              <div class="db-kit-mini-stats" style="margin-bottom:10px;">
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">1,240</div>
+                  <div class="db-kit-lbl">Views</div>
+                  <div class="db-kit-note">&#8593; 18%</div>
                 </div>
-                <!-- Row 2: Inquiry Conversion Rate · Avg Time on Page · Top Referrer -->
-                <div class="db-kit-mini-stats">
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">1.13%</div>
-                    <div class="db-kit-lbl">Inquiry Conv.</div>
-                    <div class="db-kit-note">&#8593; 0.2%</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val">2m 47s</div>
-                    <div class="db-kit-lbl">Avg Time on Page</div>
-                    <div class="db-kit-note">&#8593; 18s</div>
-                  </div>
-                  <div class="db-kit-divider"></div>
-                  <div class="db-kit-mini">
-                    <div class="db-kit-val" style="font-size:11px;padding-top:2px">Instagram</div>
-                    <div class="db-kit-lbl">Top Referrer</div>
-                    <div class="db-kit-note">68% of views</div>
-                  </div>
+                <div class="db-kit-divider"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">14</div>
+                  <div class="db-kit-lbl">Enquiries</div>
+                  <div class="db-kit-note">&#8593; 40%</div>
+                </div>
+                <div class="db-kit-divider"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val">382</div>
+                  <div class="db-kit-lbl">Link Clicks</div>
+                  <div class="db-kit-note">&#8593; 12%</div>
+                </div>
+              </div>
+              <!-- Row 2: Enquiry Conv. · Click Rate · Top Referrer -->
+              <div class="db-kit-mini-stats" style="padding-top:8px;border-top:1px solid rgba(255,255,255,0.04);">
+                <div class="db-kit-mini">
+                  <div class="db-kit-val" style="font-size:13px;">1.13%</div>
+                  <div class="db-kit-lbl">Enquiry Conv.</div>
+                </div>
+                <div class="db-kit-divider" style="height:20px;"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val" style="font-size:13px;">30.8%</div>
+                  <div class="db-kit-lbl">Click Rate</div>
+                </div>
+                <div class="db-kit-divider" style="height:20px;"></div>
+                <div class="db-kit-mini">
+                  <div class="db-kit-val" style="font-size:11px;padding-top:2px;">Instagram</div>
+                  <div class="db-kit-lbl">Top Referrer</div>
                 </div>
               </div>
             </div>
@@ -1112,10 +1111,10 @@
               <div class="db-stat-lbl">Revenue</div>
               <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px;">
                 <div class="db-status-item">
-                  <div class="db-status-dot" style="background:var(--green)"></div>
+                  <div class="db-status-dot" style="background:#48B17C"></div>
                   <div class="db-status-label">MTD</div>
                   <div style="flex:1"></div>
-                  <div class="db-status-val" style="color:var(--green);width:auto;font-size:12px;">$8,400</div>
+                  <div class="db-status-val" style="color:#48B17C;width:auto;font-size:12px;">$8,400</div>
                   <div class="db-kit-note" style="margin-left:5px;font-size:9px;">↑ 24%</div>
                 </div>
                 <div class="db-status-item">
@@ -1131,7 +1130,7 @@
                   <div class="db-status-val" style="color:var(--accent);width:auto;font-size:12px;">$16,400</div>
                 </div>
                 <div class="db-status-item">
-                  <div class="db-status-dot" style="background:var(--red)"></div>
+                  <div class="db-status-dot" style="background:#DF6B6B"></div>
                   <div class="db-status-label">Lost Deals</div>
                   <div style="flex:1"></div>
                   <div class="db-status-val" style="color:var(--muted);width:auto;font-size:12px;">$4,200</div>
@@ -1146,7 +1145,7 @@
               <div class="db-sub-title">Active Deals</div>
               <div style="display:flex;align-items:baseline;gap:6px;margin-top:4px;margin-bottom:8px;">
                 <div style="font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--text);line-height:1;">7</div>
-                <div style="font-size:10px;color:var(--blue);">3 in negotiation</div>
+                <div style="font-size:10px;color:#7A99F4;">3 in negotiation</div>
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
                 <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
@@ -1156,12 +1155,12 @@
                 </div>
                 <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
                   <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Negotiating</div>
-                  <div style="font-size:14px;font-weight:800;color:var(--blue);">3</div>
+                  <div style="font-size:14px;font-weight:800;color:#7A99F4;">3</div>
                   <div style="font-size:9px;color:var(--muted2);">$8,100</div>
                 </div>
                 <div class="db-status-item" style="flex-direction:column;align-items:flex-start;gap:2px;">
                   <div style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">Confirmed</div>
-                  <div style="font-size:14px;font-weight:800;color:var(--green);">2</div>
+                  <div style="font-size:14px;font-weight:800;color:#48B17C;">2</div>
                   <div style="font-size:9px;color:var(--muted2);">$3,300</div>
                 </div>
               </div>
@@ -1177,14 +1176,14 @@
                   <div class="db-status-val">$5,000</div>
                 </div>
                 <div class="db-status-item">
-                  <div class="db-status-dot" style="background:var(--blue)"></div>
+                  <div class="db-status-dot" style="background:#7A99F4"></div>
                   <div class="db-status-label">Negotiating</div>
                   <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:45%;background:rgba(124,156,245,0.25)"></div></div>
                   <div class="db-status-count">3</div>
                   <div class="db-status-val">$8,100</div>
                 </div>
                 <div class="db-status-item">
-                  <div class="db-status-dot" style="background:var(--green)"></div>
+                  <div class="db-status-dot" style="background:#48B17C"></div>
                   <div class="db-status-label">Confirmed</div>
                   <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:70%;background:rgba(76,175,125,0.25)"></div></div>
                   <div class="db-status-count">2</div>
@@ -1304,7 +1303,7 @@
             <div class="mb-pipe-val">$8,100</div>
           </div>
           <div class="mb-pipe-row">
-            <div class="mb-pipe-dot" style="background:var(--green)"></div>
+            <div class="mb-pipe-dot" style="background:#48B17C"></div>
             <div class="mb-pipe-label">Confirmed</div>
             <div class="mb-pipe-bar-wrap"><div class="mb-pipe-bar" style="width:70%;background:rgba(76,175,125,0.35)"></div></div>
             <div class="mb-pipe-count">2</div>
