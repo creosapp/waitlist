@@ -626,6 +626,46 @@
     }
     .pc-btn:hover { opacity: 0.82; }
 
+    /* ── FAQ ── */
+    .faq { max-width: 640px; margin: 0 auto; padding: 80px 24px 100px; }
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--surface);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: rgba(255,255,255,0.12); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      gap: 12px;
+      user-select: none;
+    }
+    .faq-q svg {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+      color: var(--muted);
+    }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      padding: 0 20px;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 20px 16px; }
+
     /* ── FINAL CTA ── */
     .final-cta {
       padding: 80px 24px 120px;
@@ -866,6 +906,7 @@
       .fc-wide { grid-column: span 1; }
       .pricing-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+      .faq { padding: 60px 20px 80px; }
       .integrations { padding: 0 24px 80px; }
       .integrations-logos { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 320px; margin: 0 auto; }
       .integration-chip { display: flex; width: 64px; height: 64px; padding: 0; border-radius: 10px; justify-content: center; align-items: center; background: transparent !important; border: none !important; transition: none !important; }
@@ -896,7 +937,7 @@
     <a href="#" class="logo">creos<span>.</span></a>
     <div class="nav-right">
       <a href="https://app.creosapp.com" class="nav-login">Log in</a>
-      <a href="#waitlist" class="nav-btn">Join Waitlist</a>
+      <a href="#waitlist" class="nav-btn">Request Access</a>
     </div>
   </nav>
 
@@ -904,17 +945,17 @@
   <div class="hero-wrap">
     <div class="hero-eyebrow">
       <span class="eyebrow-dot"></span>
-      Join the waitlist &nbsp;→
+      Invite-only early access &nbsp;→
     </div>
     <h1 class="hero-h1">The OS for your<br /><em>creator business.</em></h1>
-    <p class="hero-sub">A professional media kit page backed by a private workspace to manage deals, contacts, and revenue. Built for creators serious about brand partnerships.</p>
+    <p class="hero-sub">A live Media Kit Page backed by a full deal pipeline, brand CRM, and revenue dashboard. Built for creators, photographers, and videographers who get paid to create.</p>
 
     <div class="email-form" id="hero-form-wrap">
       <input type="email" id="hero-email" placeholder="your@email.com" />
-      <button onclick="submitToSupabase('hero-email','hero-success','hero-form-wrap',this)">Get Early Access</button>
+      <button onclick="submitToSupabase('hero-email','hero-success','hero-form-wrap',this)">Request Early Access</button>
     </div>
-    <div class="success-msg" id="hero-success">✓ You're on the list. We'll be in touch.</div>
-    <p class="form-note">No spam. Early access pricing locked in for waitlist members.</p>
+    <div class="success-msg" id="hero-success">✓ Request received. We'll send your invite soon.</div>
+
 
 
   </div>
@@ -935,29 +976,40 @@
           <div class="db-logo">creos<span>.</span></div>
           <div class="db-nav">
             <div class="db-nav-item active">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
               Dashboard
             </div>
             <div class="db-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              Media Kit
+            </div>
+            <div style="font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted2);padding:8px 8px 2px;opacity:0.6;">Business</div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              Pipeline
+            </div>
+            <div class="db-nav-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               Contacts
             </div>
             <div class="db-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-              Deals
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              Revenue
             </div>
             <div class="db-nav-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
               Analytics
             </div>
-            <div class="db-nav-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-              Media Kit
-            </div>
+          </div>
+          <div style="font-size:8px;color:var(--muted);font-family:monospace;padding:10px 12px;border-top:1px solid var(--border);">
+            chris.<span style="color:var(--accent);">creosapp.com</span>
           </div>
           <div class="db-sidebar-foot">
-            <div class="db-avatar">C</div>
-            <div class="db-name">Chris Lawson</div>
+            <div class="db-avatar">CL</div>
+            <div style="min-width:0;">
+              <div class="db-name">Chris Lawson</div>
+              <div style="font-size:8px;color:var(--muted);">@chrislawson</div>
+            </div>
           </div>
         </div>
         <div class="db-main">
@@ -968,6 +1020,25 @@
             <div class="db-notif">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="13" height="13"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
               <div class="db-notif-dot"></div>
+            </div>
+          </div>
+          <!-- New Inquiry Banner -->
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(243,202,32,0.06);border:1px solid rgba(243,202,32,0.18);border-radius:9px;margin-bottom:8px;cursor:pointer;">
+            <div style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 8px rgba(243,202,32,0.8);"></div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;font-weight:700;">New enquiry — Nike AU</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:1px;">$3,500 est. value · Campaign brief attached</div>
+            </div>
+            <div style="font-size:9px;color:var(--accent);font-weight:600;">Just now</div>
+          </div>
+          <!-- Follow-up reminder -->
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(124,156,245,0.05);border:1px solid rgba(124,156,245,0.15);border-radius:9px;margin-bottom:8px;">
+            <div style="width:24px;height:24px;background:rgba(124,156,245,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7c9cf5" stroke-width="1.8" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div style="flex:1;">
+              <div style="font-size:10px;font-weight:600;">Follow up — Adidas AU · 8 days no reply</div>
+              <div style="font-size:9px;color:var(--muted);">Negotiating · $2,200 at risk</div>
             </div>
           </div>
           <div class="db-sub-title" style="margin-bottom:6px;">Quick Actions</div>
@@ -1118,6 +1189,13 @@
                   <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:70%;background:rgba(76,175,125,0.25)"></div></div>
                   <div class="db-status-count">2</div>
                   <div class="db-status-val">$3,300</div>
+                </div>
+                <div class="db-status-item">
+                  <div class="db-status-dot" style="background:var(--muted2)"></div>
+                  <div class="db-status-label">Delivered</div>
+                  <div class="db-status-bar-wrap"><div class="db-status-bar" style="width:20%;background:rgba(74,72,69,0.4)"></div></div>
+                  <div class="db-status-count">1</div>
+                  <div class="db-status-val">$1,800</div>
                 </div>
               </div>
             </div>
@@ -1294,9 +1372,9 @@
   <!-- FEATURES -->
   <section class="features reveal" id="features">
     <div class="features-header">
-      <span class="section-label">What's inside</span>
-      <h2 class="section-h2">Every tool your<br />creator business needs.</h2>
-      <p class="section-p">One workspace. No more scattered Google Docs, Canva PDFs, and lost DMs from brands you can't find six weeks later.</p>
+      <span class="section-label">Available in early access now</span>
+      <h2 class="section-h2">A working product.<br />Not a coming soon.</h2>
+      <p class="section-p">creos is invite-only and already live. Every feature below is built and available to early access members from day one.</p>
     </div>
     <div class="features-grid">
 
@@ -1305,15 +1383,15 @@
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
         <div class="fc-name">Media Kit Page</div>
-        <div class="fc-desc">A live, beautifully designed page at username.creosapp.com. Share one link and brands have everything they need to say yes.</div>
+        <div class="fc-desc">A live page at yourname.creosapp.com with stats, portfolio, rates, testimonials, audience demographics, and brand fit. Brands can send an inquiry directly from your page.</div>
       </div>
 
       <div class="fc">
         <div class="fc-icon ic-b">
           <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
         </div>
-        <div class="fc-name">Deal Pipeline</div>
-        <div class="fc-desc">Track every brand deal from pitched to paid. Stages, notes, deliverables, and deadlines in one place.</div>
+        <div class="fc-name">Client & Deal Pipeline</div>
+        <div class="fc-desc">Kanban board with six stages from Inquiry to Paid. Drag-and-drop, deal notes, deliverables, due dates, and a change log on every deal. Stale deal alerts built in.</div>
       </div>
 
       <div class="fc">
@@ -1321,7 +1399,7 @@
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div class="fc-name">Brand CRM</div>
-        <div class="fc-desc">Your full contact book for managers, PR reps, and agencies — linked to every deal so nothing gets lost.</div>
+        <div class="fc-desc">Your full contact directory for managers, PR reps, and agencies — every contact linked to their deals, history, and notes. Search, filter, and export anytime.</div>
       </div>
 
       <div class="fc">
@@ -1329,23 +1407,23 @@
           <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
         </div>
         <div class="fc-name">Revenue Dashboard</div>
-        <div class="fc-desc">Earned, outstanding, and incoming — all in one place. Monthly totals, YTD, and pipeline projections.</div>
+        <div class="fc-desc">MTD earned, outstanding, pipeline value, and lost deals tracked automatically. Monthly bar chart and deal-level revenue table. Export to CSV anytime.</div>
       </div>
 
       <div class="fc">
         <div class="fc-icon ic-t">
           <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <div class="fc-name">Analytics</div>
-        <div class="fc-desc">Know who's viewing your page, where they came from, and whether they converted to an inquiry.</div>
+        <div class="fc-name">Media Kit Page Analytics</div>
+        <div class="fc-desc">Views, link clicks, inquiry conversion rate, avg time on page, top referrer, and enquiry source breakdown — so you know which channels are actually converting.</div>
       </div>
 
       <div class="fc">
         <div class="fc-icon ic-o">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <div class="fc-name">Personalised Insights</div>
-        <div class="fc-desc">Know what to charge, when to follow up, and why your Media Kit Page isn't converting — all powered by your data.</div>
+        <div class="fc-name">Follow-up Reminders</div>
+        <div class="fc-desc">Deals that go quiet get flagged automatically after 7 days. Dashboard alerts and email notifications so you never leave money on the table from a forgotten reply.</div>
       </div>
 
     </div>
@@ -1362,16 +1440,77 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="faq reveal">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-h2" style="margin-top:8px;">Common questions.</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Is creos actually available now, or is this a waitlist for something coming soon?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">creos is live and working. Early access members get full access to the platform from day one — Media Kit Page, deal pipeline, brand CRM, revenue dashboard, and analytics. It's invite-only while we onboard our first cohort carefully.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What's the difference between Starter and Pro?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Starter gives you the full core platform — Media Kit Page, pipeline, CRM, and revenue tracking — at $19/month. Pro adds advanced analytics with MoM tracking, stale deal alerts, invite codes, and priority access to every new feature as it ships, at $29/month.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What does the free tier include?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">The free tier gives you a live Media Kit Page at yourname.creosapp.com — including your profile, social stats, portfolio, past collaborations, and a Send Enquiry button so brands can contact you directly. The pipeline, CRM, and revenue tools require a paid plan.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Is there a free trial?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Yes — every paid plan comes with a 30-day free trial. Your card is required upfront but you won't be charged until day 31. Cancel anytime before then and you'll never pay a thing.</div>
+      </div>
+
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          Who is creos built for?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Creators, photographers, videographers, and anyone who gets paid to create. If you're managing brand deals, client work, or partnerships — and doing it through a combination of DMs, PDFs, and spreadsheets — creos was built for you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          What happens to my data if I cancel?
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <div class="faq-a">Your data is yours. You can export your deals, contacts, and revenue to CSV at any time from your settings — before or after cancelling. We don't hold your data hostage and we never will.</div>
+      </div>
+
+
+    </div>
+  </section>
+
   <!-- FINAL CTA -->
   <section class="final-cta reveal" id="waitlist">
-    <span class="section-label">Waitlist now open</span>
+    <span class="section-label">Invite-only early access</span>
     <h2 class="final-h2">Stop running your<br />business from<br /><em>your DMs.</em></h2>
-    <p class="final-p">Join the waitlist and lock in early access pricing before we launch.</p>
+    <p class="final-p">Request early access and lock in your founding member rate for life. creos is already live — we'll send your invite when a spot opens.</p>
     <div class="email-form" id="final-form-wrap">
       <input type="email" id="final-email" placeholder="your@email.com" />
-      <button onclick="submitToSupabase('final-email','final-success','final-form-wrap',this)">Join Waitlist</button>
+      <button onclick="submitToSupabase('final-email','final-success','final-form-wrap',this)">Request Early Access</button>
     </div>
-    <div class="success-msg" id="final-success">✓ You're on the list.</div>
+    <div class="success-msg" id="final-success">✓ Request received. Invite coming soon.</div>
   </section>
 
   <!-- FOOTER -->
