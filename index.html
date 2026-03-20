@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>creos. — Creator OS</title>
+  <title>creos. — The OS for your creator business</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a09'/><circle cx='16' cy='16' r='8' fill='%23f3ca20'/></svg>">
-  <meta property="og:title" content="Creos — The Creator OS" />
-  <meta property="og:description" content="A professional media kit page backed by a private workspace to manage deals, contacts, and revenue. Built for creators serious about brand partnerships." />
+  <meta property="og:title" content="creos. — The OS for your creator business" />
+  <meta property="og:description" content="A live Media Kit Page backed by a deal pipeline, brand CRM, and revenue dashboard. Built for creators, photographers and videographers who get paid to create." />
   <meta property="og:image" content="https://creosapp.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="https://creosapp.com" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Creos — The Creator OS" />
-  <meta name="twitter:description" content="A professional media kit page backed by a private workspace to manage deals, contacts, and revenue. Built for creators serious about brand partnerships." />
+  <meta name="twitter:title" content="creos. — The OS for your creator business" />
+  <meta name="twitter:description" content="A live Media Kit Page backed by a deal pipeline, brand CRM, and revenue dashboard. Built for creators, photographers and videographers who get paid to create." />
   <meta name="twitter:image" content="https://creosapp.com/og-image.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -177,6 +177,10 @@
       box-shadow: 0 0 10px rgba(76,175,125,1), 0 0 20px rgba(76,175,125,0.4);
       animation: breathe 2.4s ease-in-out infinite;
       flex-shrink: 0;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(5px); opacity: 0.7; }
     }
     @keyframes breathe {
       0%, 100% { opacity: 1; transform: scale(1); }
@@ -1410,7 +1414,7 @@
           <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
         <div class="fc-name">Media Kit Page Analytics</div>
-        <div class="fc-desc">Views, link clicks, inquiry conversion rate, avg time on page, top referrer, and enquiry source breakdown — so you know which channels are actually converting.</div>
+        <div class="fc-desc">Views, link clicks, enquiry conversion rate, click rate, and top referrer — so you know exactly where your best brand enquiries are coming from.</div>
       </div>
 
       <div class="fc">
@@ -1456,7 +1460,7 @@
           What's the difference between Starter and Pro?
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <div class="faq-a">Starter gives you the full core platform — Media Kit Page, pipeline, CRM, and revenue tracking — at $19/month. Pro adds advanced analytics with MoM tracking, stale deal alerts, invite codes, and priority access to every new feature as it ships, at $29/month.</div>
+        <div class="faq-a">Starter gives you the full core platform — Media Kit Page, pipeline, CRM, and revenue tracking. Pro adds advanced analytics with MoM tracking, stale deal alerts, invite codes, and priority access to every new feature as it ships.</div>
       </div>
 
       <div class="faq-item">
@@ -1472,7 +1476,7 @@
           Is there a free trial?
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </div>
-        <div class="faq-a">Yes — every paid plan comes with a 30-day free trial. Your card is required upfront but you won't be charged until day 31. Cancel anytime before then and you'll never pay a thing.</div>
+        <div class="faq-a">Yes — every paid plan comes with a 30-day free trial. Your card is required upfront but you won't be charged during the trial period. Cancel anytime before then and you'll never pay a thing.</div>
       </div>
 
 
@@ -1511,7 +1515,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">creos<span>.</span></div>
-    <div class="footer-copy">© 2026 Creos. All rights reserved.</div>
+    <div class="footer-copy">© 2026 Creos Labs Pty Ltd. All rights reserved.</div>
   </footer>
 
   <script>
@@ -1599,6 +1603,32 @@
       }
     }
 
+  </script>
+
+  <!-- Scroll indicator — fixed bottom, fades out on scroll -->
+  <div id="scroll-hint" style="
+    position:fixed;
+    bottom:32px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    z-index:50;
+    transition:opacity 0.4s ease;
+    pointer-events:none;
+  ">
+    <span style="font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#ede9e3;">Scroll</span>
+    <svg id="scroll-arrow" style="animation:scrollBounce 1.6s ease-in-out infinite;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ede9e3" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+  <script>
+    (function() {
+      var hint = document.getElementById('scroll-hint');
+      window.addEventListener('scroll', function() {
+        hint.style.opacity = window.scrollY > 80 ? '0' : '1';
+      }, { passive: true });
+    })();
   </script>
 </body>
 </html>
